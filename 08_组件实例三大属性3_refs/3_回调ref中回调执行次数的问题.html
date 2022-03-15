@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2_回调函数形式的ref</title>
+</head>
+<body>
+  <!-- 创建容器 -->
+  <div id="test"></div>
+
+  <!-- 引入react核心库-->
+  <script src="../js/react.development.js"></script>
+  <!-- 引入ract-dom 用于支持react操作dom-->
+  <script src="../js/react-dom.development.js"></script>
+  <!-- 引入babel 用于将jsx转为js-->
+  <script src="../js/babel.min.js"></script>
+</body>
+</html>
+
+<script type="text/babel">
+  class Demo extends React.Component {
+    // 设置state属性
+    state = {isHot: true}
+
+    // 点击天气变化时
+    changeWeather = () => {
+      const { isHot } = this.state;
+      this.setState({isHot: !isHot})
+    }
+
+    // 展示数据
+    clickShowData = ()=> {
+      const {input1} = this;
+      alert(input1.value)
+    }
+
+    saveInput = (currentNode) => {
+      this.input1 = currentNode;
+      console.log('@', currentNode)
+    }
+
+    render() {
+      // 获取state中的属性
+      const {isHot} = this.state
+      
+      return (
+        <div>
+          <h2>今天天气很{isHot ? '炎热' : '寒冷'}</h2>
+          {/*<input ref={(currentNode) => {this.input1 = currentNode; console.log('@', currentNode)}} type="text" placeholder="输入数据点击按钮"/>&nbsp;*/}
+          <input ref={this.saveInput} type="text" placehodler="输入数据点击按钮"/>&nbsp;
+          <button onClick={this.clickShowData}>提示左侧的输入数据</button>&nbsp;
+          <button onClick={this.changeWeather}>点我切换天气</button>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Demo/>, document.getElementById('test'));
+</script>

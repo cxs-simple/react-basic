@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+
+<script>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    speak() {
+      console.log(this);
+    }
+  }
+
+  const p1 = new Per('Tom', 18);
+  // 通过Person实例调用speak()方法，this就是Person实例
+  p1.speak();
+
+  // 直接调用，由于类中的方法默认开启局部严格模式，this为undefined
+  const test = p1.speak;
+  test();
+</script>
